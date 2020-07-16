@@ -18,7 +18,7 @@
             <h1>DECLARAÇÃO</h1> 
           </div>"
         </div>
-        <div class="row">
+        <div class="row extra-space-bottom">
           <div class="font16 col-md-3 col-sd-3 text-left">
           Declaro que: <br/>
           </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="row" >
           <div class="col-md-6 col-sd-6">
-            <select class="font14 form-control" name="fieldprogram" [(ngModel)]="decFormModel.fieldprogram" (change)="check($event)" >
+            <select class="font14 form-control" name="fieldprogram" [(ngModel)]="decFormModel.fieldprogram" (change)="check1($event)" >
               <option *ngFor="let p of programas" 
                 value="{{ p }}" >{{ p }}
               </option>
@@ -55,14 +55,14 @@
             </div>
           </div>
           <br/>
-          <div  *ngIf="isHidden" class="col-md-4 col-sd-4">Outro: <input class="form-control" [(ngModel)]="decFormModel.fieldpreservoutrotext" ngHide="isHidden" type="text" name="fieldprogramoutrotext" value="">
-            <div class="alert alert-warning" *ngIf="decFormModel.errorfieldprogramoutrotext">
-              {{ decFormModel.msgerrorfieldprogramoutrotext }}
-            </div>
+            <div  *ngIf="!isHidden" class="col-md-4 col-sd-4">Outro: <input class="form-control" [(ngModel)]="decFormModel.fieldprogramoutrotext" ngHide="isHidden" type="text" name="fieldprogramoutrotext" value="">
+              <div class="alert alert-warning" *ngIf="decFormModel.errorfieldprogramoutrotext">
+                {{ decFormModel.msgerrorfieldprogramoutrotext }}
+              </div>
           </div>
         </div>
         <div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Título do trabalho:</div>
+          <div class="row" style="margin-top: 10px;"><div class="font14 col-md-3 col-sd-3">Título do trabalho:</div>
             <div class="col-md-8 col-sd-8">  
               <input class="form-control"  [(ngModel)]="decFormModel.fieldtitle" type="text" name="fieldtitle"> 
               
@@ -88,33 +88,43 @@
             Preservação: <br/>
           </div>
           <div class="font14 col-md-8 col-sd-8">
-          <label class="form-check-label" *ngFor="let con of preservation">
-            <input [(ngModel)]="decFormModel.fieldpreserv" 
-            class="form-box-input" 
-            type="checkbox" name="{{ con.name }} " 
-            value="{{ con.name }}"
-            (change)="changeSelection($event.target)" >
-            {{ con.name }}&nbsp;&nbsp;&nbsp;&nbsp;
-          </label>
-          <label> <input class="form-box-input" [(ngModel)]="decFormModel.fieldpreservoutro" type="checkbox" name="fieldpreserv" value="OUTRO" id="fieldpreservoutro">OUTRO </label>
-          <input class="form-control" [(ngModel)]="decFormModel.fieldpreservoutrotext" type="text" name="fieldpreservoutrotext" id="fieldpreservoutrotext" value="">
+            <label class="form-check-label" *ngFor="let con of preservation">
+              <input [(ngModel)]="con.checked" 
+              class="form-box-input" 
+              type="checkbox" name="{{ con.name }} " 
+              value="{{ con.name }}"
+              (change)="changeSelection($event.target)" >
+              {{ con.name }}&nbsp;&nbsp;&nbsp;&nbsp; 
+            </label>
+          </div>
         </div>
+        <div *ngIf="!isHidden2" class="row font14">
+          <div class="font14 col-md-3 col-sd-3">
+            OUTRO MEIO DE PRESERVAÇÃO:
+          </div>
+          <div class="font14 col-md-8 col-sd-8">
+            <input class="form-control" [(ngModel)]="decFormModel.fieldpreservoutrotext" type="text" name="fieldpreservoutrotext" id="fieldpreservoutrotext" value="">
+          </div>
         </div>
         <div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Quantidade de espécies: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldhowmanyspecie" type="text" name="fieldhowmanyspecie"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Ordem: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldorder" type="text" name="fieldorder"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Família (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldfamily" type="text" name="fieldfamily"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Gênero (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldgenre" type="text" name="fieldgenre"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Espécie (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldspecie"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Técnico(a) da Coleção*: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldtech" type="text" name="fieldtech"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Discente: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldstudent" type="text" name="fieldstudent"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Orientador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldsupervisor" type="text" name="fieldsupervisor"></div></div>
-          <div class="row"><div class="font14 col-md-3 col-sd-3">Curador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldcurator" type="text" name="fieldcurator"></div> </div>
-          <br/>*conferente
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Quantidade de espécies: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldhowmanyspecie" type="text" name="fieldhowmanyspecie"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Ordem: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldorder" type="text" name="fieldorder"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Família (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldfamily" type="text" name="fieldfamily"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Gênero (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldgenre" type="text" name="fieldgenre"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Espécie (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldspecie"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Técnico(a) da Coleção*: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldtech" type="text" name="fieldtech"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Discente: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldstudent" type="text" name="fieldstudent"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Orientador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldsupervisor" type="text" name="fieldsupervisor"></div></div>
+        <div class="row"><div class="font14 col-md-3 col-sd-3">Curador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldcurator" type="text" name="fieldcurator"></div> </div>
+        <br/>*conferente
         </div>
         <br/>
-        <div class="alingright">
-          <input class="btn btn-dark btn-lg" (click)="downloadAsPDF()" type="button" value= "Gerar PDF" />
+        <div class="row">
+          <div class="font14 col-md-12 col-sd-12">
+            <div class="alingright">
+              <input class="btn btn-dark btn-block" (click)="downloadAsPDF()" type="button" value= "Gerar PDF" />
+            </div>
+          </div>
         </div>
       </form>
 

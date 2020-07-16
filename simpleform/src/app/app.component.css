@@ -26,6 +26,6 @@ table, tr, td {
     text-align: center;
 }
 
-.extra-space {
-    margin-bottom: 50px;
+.extra-space-bottom {
+    margin-bottom: 20px;
 }

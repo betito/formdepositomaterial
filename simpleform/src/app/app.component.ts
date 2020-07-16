@@ -15,11 +15,13 @@ import * as jsPDF from 'jspdf';
 export class AppComponent implements OnInit {
   title = 'Declaração de Depósito';
   isHidden = true;
+  isHidden2 = true;
   programas = [ 'IC', 'TCC', 'MESTRADO', 'DOUTORADO', 'PÓS-DOUTORADO', 'OUTRO'];
   preservation = [
      {name: 'À SECO', checked: false },
      {name: 'EM FRASCOS COM ÁLCOOL', checked: false },
-     {name: 'EM LÂMINAS', checked: false }
+     {name: 'EM LÂMINAS', checked: false },
+     {name: 'OUTRO', checked: false }
   ];
 
   decFormModel = new DecForm('', '', '', '', '', '', this.preservation, '', '', '', '', '', '', '', '', '', '', '');
@@ -30,12 +32,19 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public check(event) {
-    console.log(event);
+  public check1(event) {
     if (event.target.value === 'OUTRO') {
       this.isHidden = false;
     } else {
       this.isHidden = true;
+    }
+  }
+
+  public check2(event) {
+    if (event.target.value === 'OUTRO') {
+      this.isHidden2 = false;
+    } else {
+      this.isHidden2 = true;
     }
   }
 
@@ -47,6 +56,14 @@ export class AppComponent implements OnInit {
       }
     });
     this.decFormModel.fieldpreserv = this.preservation;
+
+    if ((e.value === 'OUTRO') && (e.checked === true)) {
+      this.isHidden2 = false;
+    } else {
+      this.isHidden2 = true;
+    }
+
+
     console.log(this.preservation);
   }
 
