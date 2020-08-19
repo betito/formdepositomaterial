@@ -155,67 +155,87 @@ export class AppComponent implements OnInit {
 
   public downloadAsPDF() {
 
-    if (this.validateForm()) {
+    //if (this.validateForm()) {
 
-      ///let imgData = './assets/imgs/brasao.png';
+      let imgData = './assets/imgs/brasao.png';
       let content = '';
+      const x = 20;
+      let y = 40;
+      const x_meio = 105;
 
       const doc = new jsPDF();
 
-      //doc.addImage(imgData, 'PNG', 15, 40, 180, 160);
-      //doc.addImage(imgData, 'PNG', 15, 40, 180, 160);
-      const x = 50;
-      const y = 40;
-      doc.setFontSize(8);
+      //content += '<img width="75px" src="./assets/imgs/brasao.png" alt="Brasão"/><br/>';
+      const img = new Image();
+      img.src = imgData;
+      doc.addImage(img, 'PNG', x_meio, y, 75, 75);
 
-      content = 'MINISTÉRIO DA CIÊNCIA, TECNOLOGIA E INOVAÇÃO - MCTI';
-      doc.text(content, x, y);
-      doc.setFontSize(11);
-      content = '\nINSTITUTO NACIONAL DE PESQUISAS DA AMAZÔNIA';
-      doc.text(content, x, y + 1);
-      doc.setFontSize(9);
-      content = '\n\nPROGRAMA DE COLEÇÕES CIENTÍFICAS BIOLÓGICAS - PCCB';
-      doc.text(content, x, y + 2);
       doc.setFontSize(8);
-      content = '\n\n\nAvenida André Araújo, 2936 - Petrópolis – 69.067-375 – Manaus, Amazonas, Brasil';
-      doc.text(content, x, y + 3);
-      doc.setFontSize(13);
-      content = '\n\n\n\n\n\nNome: ' + this.decFormModel.fieldname;
-      content += '\n' +  'Programa: ' + this.decFormModel.fieldprogramtext;
-      content += '\n' + this.decFormModel.fieldprogramoutrotext;
+      content = 'MINISTÉRIO DA CIÊNCIA, TECNOLOGIA E INOVAÇÃO - MCTI\n';
+      doc.text (content, x_meio, y, null, null, 'center');
+      doc.setFontSize(11);
+      content = 'INSTITUTO NACIONAL DE PESQUISAS DA AMAZÔNIA\n';
+      doc.text (content, x_meio, y + 4, null, null, 'center');
+      doc.setFontSize(9);
+      content = 'PROGRAMA DE COLEÇÕES CIENTÍFICAS BIOLÓGICAS - PCCB\n';
+      content += 'Avenida André Araújo, 2936 - Petrópolis – 69.067-375 – Manaus, Amazonas, Brasil';
+      doc.text (content, x_meio, y + 8, null, null, 'center');
+      doc.setFontSize(16);
+      doc.setFontType('bold');
+      content = '\n\nDECLARAÇÃO\n\n';
+      doc.text (content, x_meio, y + 15, null, null, 'center');
+      doc.setFontType ('normal');
+      doc.setFontSize(12);
+      content = 'Declaro que:\n\n';
+      this.buildDoc (doc, content, '', x, 85);
+
+      y = 92;
+      this.buildDoc (doc, 'Nome:\t\t\t\t', this.decFormModel.fieldname, x, y);
+      this.buildDoc (doc, 'Programa:\t\t\t\t', this.decFormModel.fieldprogramtext, x, y += 7);
+      this.buildDoc (doc, 'Nível:\t\t\t\t', this.decFormModel.fieldprogramoutrotext, x, y += 7);
+
       let preserv = '';
       this.preservation.forEach((elem) => {
         if (elem.checked) {
-          preserv += ' ( X ) ' + elem.name + '\n';
+          preserv +=  '( X ) ' + elem.name + '\n';
         } else {
-          preserv += ' (    ) ' + elem.name + '\n';
+          preserv +=  '(    ) ' + elem.name + '\n';
         }
       });
+      preserv += '\nOutro: ' + this.decFormModel.fieldpreservoutrotext;
 
-      content += '\nPreservação: \n' + preserv;
-      content += '\nTítulo do trabalho: ' + this.decFormModel.fieldtitle;
-      content += '\ndepositou na coleção de Invertebrados do INPA o seguinte material biológico:';
-      content += '\nQuantidade: ' + this.decFormModel.fieldhowmany;
-      content += '\nOutro: ' + this.decFormModel.fieldpreservoutrotext;
-      content += '\nQuantidade de espécies: ' + this.decFormModel.fieldhowmanyspecie;
-      content += '\nOrdem: ' + this.decFormModel.fieldorder;
-      content += '\nFamília (s): ' + this.decFormModel.fieldfamily;
-      content += '\nGênero: ' + this.decFormModel.fieldgenre;
-      content += '\nEspécie: ' + this.decFormModel.fieldspecie;
-      let table = '';
-      table += '\n\n\n                                             NOME                                   ASSINATURA';
-      table += '\n\nTÉCNICO DA COLEÇÃO*: ' + this.decFormModel.fieldtech;
-      table += '\n\nDISCENTE: ' + this.decFormModel.fieldstudent;
-      table += '\n\nORIENTADOR: ' + this.decFormModel.fieldsupervisor;
-      table += '\n\nCURADOR: ' + this.decFormModel.fieldcurator;
-      table += '\n\n*conferente';
-      content += table;
-      doc.text (content, x - 30, y + 10);
+      this.buildDoc (doc, 'Preservação:\t\t\t\t', preserv, x, y += 7);
+      y += 30;
+      this.buildDoc (doc, 'Título do trabalho::\t\t\t\t', this.decFormModel.fieldtitle, x, y += 7);
+      this.buildDoc (doc, 'depositou na coleção de Invertebrados do INPA o seguinte material biológico:', '', x, y += 7);
+      this.buildDoc (doc, 'Quantidade:', this.decFormModel.fieldhowmany, x, y += 7);
+      this.buildDoc (doc, 'Quantidade de espécies:\t\t\t\t', this.decFormModel.fieldhowmanyspecie, x, y += 7);
+      this.buildDoc (doc, 'Ordem:\t\t\t\t', this.decFormModel.fieldorder, x, y += 7);
+      this.buildDoc (doc, 'Família (s):\t\t\t\t', this.decFormModel.fieldfamily, x, y += 7);
+      this.buildDoc (doc, 'Gênero:\t\t\t\t', this.decFormModel.fieldgenre, x, y += 7);
+      this.buildDoc (doc, 'Espécie: \t\t\t\t', this.decFormModel.fieldspecie, x, y += 7);
+
+      const signature =  '\n\n(ASSINATURA) ____________________________ ';
+      this.buildDoc (doc, 'TÉCNICO DA COLEÇÃO*:\n*conferente\t\t\t\t', this.decFormModel.fieldtech + signature, x, y += 18);
+      this.buildDoc (doc, 'DISCENTE:\t\t\t\t', this.decFormModel.fieldstudent + signature, x, y += 18);
+      this.buildDoc (doc, 'ORIENTADOR:\t\t\t\t', this.decFormModel.fieldsupervisor + signature, x, y += 18);
+      this.buildDoc (doc, 'CURADOR:\t\t\t\t', this.decFormModel.fieldcurator + signature, x, y += 18);
+      //this.buildDoc (doc, '*conferente', '', x, y += 7);
+
       doc.save ('declaracao.pdf');
 
-    } else {
-      alert ('Existem campos que precisam ser revisados.');
-    }
+    // } else {
+    //   alert ('Existem campos que precisam ser revisados.');
+    // }
+  }
+
+
+  private buildDoc(doc, label, value, curx, cury) {
+      let x_offset = 85;
+      doc.setFontType ('normal');
+      doc.text(label, curx, cury);
+      doc.setFontType ('bold');
+      doc.text(value, x_offset, cury);
   }
 
 }

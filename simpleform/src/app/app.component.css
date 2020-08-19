@@ -14,11 +14,31 @@ table, tr, td {
     font-family: Roboto;
 }
 
-.font14 {
+
+.fontsize08 {
+    font-size: 12pt;
+}
+
+
+.fontsize09 {
+    font-size: 09pt;
+}
+
+
+.fontsize11 {
+    font-size: 11pt;
+}
+
+
+.fontsize12 {
+    font-size: 12pt;
+}
+
+.fontsize14 {
     font-size: 14pt;
 }
 
-.font16 {
+.fontsize16 {
     font-size: 16pt;
 }
 
