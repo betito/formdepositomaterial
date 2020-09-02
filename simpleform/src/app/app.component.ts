@@ -157,7 +157,8 @@ export class AppComponent implements OnInit {
 
     //if (this.validateForm()) {
 
-      let imgData = './assets/imgs/brasao.png';
+      let imgData1 = './assets/imgs/brasao.png';
+      let imgData2 = './assets/imgs/inpa-colecoesinpa-mctic.jpg';
       let content = '';
       const x = 20;
       let y = 40;
@@ -167,8 +168,8 @@ export class AppComponent implements OnInit {
 
       //content += '<img width="75px" src="./assets/imgs/brasao.png" alt="Brasão"/><br/>';
       const img = new Image();
-      img.src = imgData;
-      doc.addImage(img, 'PNG', x_meio, y, 75, 75);
+      img.src = imgData1;
+      doc.addImage(img, 'PNG', x_meio - 10, y - 20, 15, 15);
 
       doc.setFontSize(8);
       content = 'MINISTÉRIO DA CIÊNCIA, TECNOLOGIA E INOVAÇÃO - MCTI\n';
@@ -215,12 +216,17 @@ export class AppComponent implements OnInit {
       this.buildDoc (doc, 'Gênero:\t\t\t\t', this.decFormModel.fieldgenre, x, y += 7);
       this.buildDoc (doc, 'Espécie: \t\t\t\t', this.decFormModel.fieldspecie, x, y += 7);
 
-      const signature =  '\n\n(ASSINATURA) ____________________________ ';
-      this.buildDoc (doc, 'TÉCNICO DA COLEÇÃO*:\n*conferente\t\t\t\t', this.decFormModel.fieldtech + signature, x, y += 18);
-      this.buildDoc (doc, 'DISCENTE:\t\t\t\t', this.decFormModel.fieldstudent + signature, x, y += 18);
-      this.buildDoc (doc, 'ORIENTADOR:\t\t\t\t', this.decFormModel.fieldsupervisor + signature, x, y += 18);
-      this.buildDoc (doc, 'CURADOR:\t\t\t\t', this.decFormModel.fieldcurator + signature, x, y += 18);
+      const signature =  '\n(ASSINATURA) ____________________________ ';
+      this.buildDoc (doc, 'TÉCNICO DA COLEÇÃO*:\n*conferente\t\t\t\t', this.decFormModel.fieldtech + signature, x, y += 15);
+      this.buildDoc (doc, 'DISCENTE:\t\t\t\t', this.decFormModel.fieldstudent + signature, x, y += 15);
+      this.buildDoc (doc, 'ORIENTADOR:\t\t\t\t', this.decFormModel.fieldsupervisor + signature, x, y += 15);
+      this.buildDoc (doc, 'CURADOR:\t\t\t\t', this.decFormModel.fieldcurator + signature, x, y += 15);
       //this.buildDoc (doc, '*conferente', '', x, y += 7);
+
+      const img2 = new Image();
+      img2.src = imgData2;
+      doc.addImage(img2, 'PNG', x_meio-10, y +=10, 90, 15);
+
 
       doc.save ('declaracao.pdf');
 
