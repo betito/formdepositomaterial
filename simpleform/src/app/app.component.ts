@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
      {name: 'OUTRO', checked: false }
   ];
 
-  decFormModel = new DecForm('', '', '', '', '', '', this.preservation, '', '', '', '', '', '', '', '', '', '', '');
+  decFormModel = new DecForm('', '', '', '', '', '', this.preservation, '', '', '', '', '', '', '', '', '', '', '', '');
 
   constructor() {
   }
@@ -196,6 +196,7 @@ export class AppComponent implements OnInit {
       this.buildDoc (doc, 'Nome:\t\t\t\t', this.decFormModel.fieldname, x, y);
       this.buildDoc (doc, 'Programa:\t\t\t\t', this.decFormModel.fieldprogramtext, x, y += 7);
       this.buildDoc (doc, 'Nível:\t\t\t\t', this.decFormModel.fieldprogramoutrotext, x, y += 7);
+      this.buildDoc (doc, 'Curadoria:\t\t\t\t', this.decFormModel.fieldcuradoria, x, y += 7);
 
       let preserv = '';
       this.preservation.forEach((elem) => {

@@ -69,8 +69,14 @@
             </div>
           </div>
           <div class="row fontsize14">
-            <div class="fontsize14 col-md-12 col-sd-12">
-            depositou na coleção de Invertebrados do INPA o seguinte material biológico: <br/>
+            <div class="fontsize14 col-md-3 col-sd-3">
+            depositou o seguinte material biológico na curadoria: <br/>
+            </div>
+            <div class="col-md-8 col-sd-8">  
+              <select [(ngModel)]="decFormModel.fieldcuradoria" name="fieldcuradoria"> class="form-control">
+                  <option class="fontsize14" *ngFor="let cur of curadorias"
+                    value="{{ cur }}"> {{ cur }}
+              </select>
             </div>
           </div>
 
