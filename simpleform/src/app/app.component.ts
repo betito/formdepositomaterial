@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   isHidden = true;
   isHidden2 = true;
   programas = [ 'IC', 'TCC', 'MESTRADO', 'DOUTORADO', 'PÓS-DOUTORADO', 'OUTRO'];
+  curadorias = [ 'Anfíbios e Répteis', 'Aves', 'Herbário', 'Invertebrados', 'Mamíferos', 'Microrganismos de Interesse Agrossilvicultural',
+                 'Microrganismos de Interesse Médico', 'Peixes' , 'Recursos Genéticos'];
   preservation = [
      {name: 'À SECO', checked: false },
      {name: 'EM FRASCOS COM ÁLCOOL', checked: false },
