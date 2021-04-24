@@ -210,6 +210,7 @@ export class AppComponent implements OnInit {
 
       this.buildDoc (doc, 'Preservação:\t\t\t\t', preserv, x, y += 7);
       y += 30;
+      this.buildDoc (doc, 'Data::\t\t\t\t', this.decFormModel.fielddate, x, y += 7);
       this.buildDoc (doc, 'Título do trabalho::\t\t\t\t', this.decFormModel.fieldtitle, x, y += 7);
       this.buildDoc (doc, 'depositou na coleção de Invertebrados do INPA o seguinte material biológico:', '', x, y += 7);
       this.buildDoc (doc, 'Quantidade:', this.decFormModel.fieldhowmany, x, y += 7);
@@ -218,6 +219,7 @@ export class AppComponent implements OnInit {
       this.buildDoc (doc, 'Família (s):\t\t\t\t', this.decFormModel.fieldfamily, x, y += 7);
       this.buildDoc (doc, 'Gênero:\t\t\t\t', this.decFormModel.fieldgenre, x, y += 7);
       this.buildDoc (doc, 'Espécie: \t\t\t\t', this.decFormModel.fieldspecie, x, y += 7);
+      this.buildDoc (doc, 'Núm. de registro: \t\t\t\t', this.decFormModel.fieldnumreg, x, y += 7);
 
       const signature =  '\n(ASSINATURA) ____________________________ ';
       this.buildDoc (doc, 'TÉCNICO DA COLEÇÃO*:\n*conferente\t\t\t\t', this.decFormModel.fieldtech + signature, x, y += 15);

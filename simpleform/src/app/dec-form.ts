@@ -38,6 +38,7 @@ export class DecForm {
     msgerrorfieldsupervisor = '';
     msgerrorfieldcurator = '';
     msgerrorfieldcuradoria = '';
+    
 
     constructor(
         public fieldname: string,
@@ -58,6 +59,8 @@ export class DecForm {
         public fieldstudent: string,
         public fieldsupervisor: string,
         public fieldcurator: string,
-        public fieldcuradoria: string
+        public fieldcuradoria: string,
+        public fieldnumreg: string,
+        public fielddate: string
     ) {}
 }
