@@ -175,24 +175,25 @@ export class AppComponent implements OnInit {
 
       doc.setFontSize(8);
       content = 'MINISTÉRIO DA CIÊNCIA, TECNOLOGIA E INOVAÇÃO - MCTI\n';
-      doc.text (content, x_meio, y);
+      doc.text (content, x_meio - 45, y );
       doc.setFontSize(11);
       content = 'INSTITUTO NACIONAL DE PESQUISAS DA AMAZÔNIA\n';
-      doc.text (content, x_meio, y + 4);
+      doc.text (content, x_meio - 55, y + 4);
       doc.setFontSize(9);
       content = 'PROGRAMA DE COLEÇÕES CIENTÍFICAS BIOLÓGICAS - PCCB\n';
-      content += 'Avenida André Araújo, 2936 - Petrópolis – 69.067-375 – Manaus, Amazonas, Brasil';
-      doc.text (content, x_meio, y + 8);
+      doc.text (content, x_meio - 50, y + 8);
+      content = 'Avenida André Araújo, 2936 - Petrópolis – 69.067-375 – Manaus, Amazonas, Brasil';
+      doc.text (content, x_meio - 60, y + 12);
       doc.setFontSize(16);
-      doc.setFont('times','bold');
+      doc.setFont('Verdana','bold');
       content = '\n\nDECLARAÇÃO\n\n';
-      doc.text (content, x_meio, y + 15);
-      doc.setFont('times','normal');
+      doc.text (content, x_meio - 25, y + 10);
+      doc.setFont('Verdana','normal');
       doc.setFontSize(12);
       content = 'Declaro que:\n\n';
-      this.buildDoc (doc, content, '', x, 85);
+      this.buildDoc (doc, content, '', x, 75);
 
-      y = 92;
+      y = 82;
       this.buildDoc (doc, 'Nome:\t\t\t\t', this.decFormModel.fieldname, x, y);
       this.buildDoc (doc, 'Programa:\t\t\t\t', this.decFormModel.fieldprogramtext, x, y += 7);
       this.buildDoc (doc, 'Nível:\t\t\t\t', this.decFormModel.fieldprogramoutrotext, x, y += 7);
@@ -211,7 +212,7 @@ export class AppComponent implements OnInit {
       this.buildDoc (doc, 'Preservação:\t\t\t\t', preserv, x, y += 7);
       y += 30;
       this.buildDoc (doc, 'Data::\t\t\t\t', this.decFormModel.fielddate, x, y += 7);
-      this.buildDoc (doc, 'Título do trabalho::\t\t\t\t', this.decFormModel.fieldtitle, x, y += 7);
+      this.buildDoc (doc, 'Título do trabalho:\t\t\t\t', this.decFormModel.fieldtitle, x, y += 7);
       this.buildDoc (doc, 'depositou na coleção de Invertebrados do INPA o seguinte material biológico:', '', x, y += 7);
       this.buildDoc (doc, 'Quantidade:', this.decFormModel.fieldhowmany, x, y += 7);
       this.buildDoc (doc, 'Quantidade de espécies:\t\t\t\t', this.decFormModel.fieldhowmanyspecie, x, y += 7);

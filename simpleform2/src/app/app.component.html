@@ -1,0 +1,147 @@
+<div class="container-fluid">
+  <header>
+    <img width="75px" src="./assets/imgs/brasao.png" alt="Brasão"/><br/>
+    <span class="fontsize08">MINISTÉRIO DA CIÊNCIA, TECNOLOGIA E INOVAÇÃO - MCTI </span><br/>
+    <span class="fontsize11">INSTITUTO NACIONAL DE PESQUISAS DA AMAZÔNIA</span><br/>
+    <span class="fontsize09">PROGRAMA DE COLEÇÕES CIENTÍFICAS BIOLÓGICAS - PCCB</span><br/>
+    <span class="fontsize09">Avenida André Araújo, 2936 - Petrópolis – 69.067-375 – Manaus, Amazonas, Brasil</span><br/>
+  </header>
+
+  <div class="fontroboto">
+
+    <div class="">
+      
+      <form #decForm="ngForm">
+        <br/>
+        <div class="row">
+          <div class="col-md-12 col-sd-12 mcenter">
+            <h1>DECLARAÇÃO</h1> 
+          </div>
+        </div>
+        <div class="row extra-space-bottom">
+          <div class="fontsize16 col-md-3 col-sd-3 text-left">
+          Declaro que: <br/>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="fontsize14 col-md-2 col-sd-2">Nome:</div>
+          <div class="col-md-9 col-sd-9"> 
+            <input required class="form-control"  [(ngModel)]="decFormModel.fieldname" type="text" name="fieldname"> <br/>
+            <div class="alert alert-warning" *ngIf="decFormModel.errorfieldname">
+              {{ decFormModel.msgerrorfieldname }}
+          </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="fontsize14 col-md-2 col-sd-2">Programa:</div>
+          <div class="col-md-9 col-sd-9"> 
+            <input class="form-control"  [(ngModel)]="decFormModel.fieldprogramtext" type="text" name="fieldprogramtext" > <br/>
+            <div class="alert alert-warning" *ngIf="decFormModel.errorfieldprogramtext">
+              {{ decFormModel.msgerrorfieldprogramtext }}
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 col-sd-6">
+            <select class="fontsize14 form-control" name="fieldprogram" [(ngModel)]="decFormModel.fieldprogram" (change)="check1($event)" >
+              <option *ngFor="let p of programas" 
+                value="{{ p }}" >{{ p }}
+              </option>
+            </select>
+            <div class="alert alert-warning" *ngIf="decFormModel.errorfieldprogram">
+              {{ decFormModel.msgerrorfieldprogram }}
+            </div>
+          </div>
+          <br/>
+            <div  *ngIf="!isHidden" class="col-md-4 col-sd-4">Outro: <input class="form-control" [(ngModel)]="decFormModel.fieldprogramoutrotext" ngHide="isHidden" type="text" name="fieldprogramoutrotext" value="">
+              <div class="alert alert-warning" *ngIf="decFormModel.errorfieldprogramoutrotext">
+                {{ decFormModel.msgerrorfieldprogramoutrotext }}
+              </div>
+          </div>
+        </div>
+        <div>
+          <div class="row" style="margin-top: 10px;"><div class="fontsize14 col-md-3 col-sd-3">Título do trabalho:</div>
+            <div class="col-md-8 col-sd-8">  
+              <input class="form-control"  [(ngModel)]="decFormModel.fieldtitle" type="text" name="fieldtitle"> 
+              
+            </div>
+          </div>
+          <div class="row fontsize14">
+            <div class="fontsize14 col-md-3 col-sd-3">
+            depositou o seguinte material biológico na curadoria: <br/>
+            </div>
+            <div class="col-md-8 col-sd-8">  
+              <select [(ngModel)]="decFormModel.fieldcuradoria" name="fieldcuradoria"> class="form-control">
+                  <option class="fontsize14" *ngFor="let cur of curadorias"
+                    value="{{ cur }}"> {{ cur }}
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fontsize14 col-md-3 col-sd-3">Quantidade de indíviduos/amostra: </div>
+            <div class="col-md-8 col-sd-8"> 
+              <input class="form-control"  [(ngModel)]="decFormModel.fieldhowmany" type="text" name="fieldhowmany">
+              
+            </div>
+          </div>
+        </div>
+          
+        <div class="row fontsize14">
+          <div class="fontsize14 col-md-3 col-sd-3">
+            Preservação: <br/>
+          </div>
+          <div class="fontsize14 col-md-8 col-sd-8">
+            <label class="form-check-label" *ngFor="let con of preservation">
+              <input [(ngModel)]="con.checked" 
+              class="form-box-input" 
+              type="checkbox" name="{{ con.name }} " 
+              value="{{ con.name }}"
+              (change)="changeSelection($event.target)" >
+              {{ con.name }}&nbsp;&nbsp;&nbsp;&nbsp; 
+            </label>
+          </div>
+        </div>
+        <div *ngIf="!isHidden2" class="row fontsize14">
+          <div class="fontsize14 col-md-3 col-sd-3">
+            OUTRO MEIO DE PRESERVAÇÃO:
+          </div>
+          <div class="fontsize14 col-md-8 col-sd-8">
+            <input class="form-control" [(ngModel)]="decFormModel.fieldpreservoutrotext" type="text" name="fieldpreservoutrotext" id="fieldpreservoutrotext" value="">
+          </div>
+        </div>
+        <div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Data: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldhowmanyspecie" type="text" name="fielddate"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Quantidade de espécies: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldhowmanyspecie" type="text" name="fieldhowmanyspecie"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Ordem: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldorder" type="text" name="fieldorder"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Família (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldfamily" type="text" name="fieldfamily"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Gênero (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldgenre" type="text" name="fieldgenre"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Espécie (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldspecie"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Num. de Registro: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldnumreg"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Técnico(a) da Coleção*: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldtech" type="text" name="fieldtech"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Discente: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldstudent" type="text" name="fieldstudent"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Orientador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldsupervisor" type="text" name="fieldsupervisor"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Curador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldcurator" type="text" name="fieldcurator"></div> </div>
+        <br/>*conferente
+        </div>
+        <br/>
+        <div class="row">
+          <div class="fontsize14 col-md-12 col-sd-12">
+            <div class="alingright">
+              <input class="btn btn-dark btn-block" (click)="downloadAsPDF()" type="button" value= "Gerar PDF" />
+            </div>
+          </div>
+        </div>
+      </form>
+
+      
+    </div>
+  </div>
+  <footer class="extra-space">
+    <img align="right" src="./assets/imgs/pccb.png" alt="PCCB"/>
+  </footer>
+  
+</div>
+<router-outlet></router-outlet>
