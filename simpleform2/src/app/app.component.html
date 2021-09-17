@@ -48,13 +48,13 @@
         </div>
         <div class="row" >
           <div class="col-md-6 col-sd-6">
-            <select class="fontsize14 form-control" name="fieldprogram" [(ngModel)]="decFormModel.fieldprogram" (change)="check1($event)" >
+            <select class="fontsize14 form-control" name="fieldprogramoutrotext" [(ngModel)]="decFormModel.fieldprogramoutrotext" (change)="check1($event)" >
               <option *ngFor="let p of programas" 
                 value="{{ p }}" >{{ p }}
               </option>
             </select>
-            <div class="alert alert-warning" *ngIf="decFormModel.errorfieldprogram">
-              {{ decFormModel.msgerrorfieldprogram }}
+            <div class="alert alert-warning" *ngIf="decFormModel.errorfieldprogramoutrotext">
+              {{ decFormModel.msgerrorfieldprogramoutrotext }}
             </div>
           </div>
           <br/>
@@ -122,7 +122,7 @@
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Família (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldfamily" type="text" name="fieldfamily"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Gênero (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldgenre" type="text" name="fieldgenre"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Espécie (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldspecie"></div></div>
-          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Num. de Registro: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldnumreg"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Num. de Registro: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldnumreg" type="text" name="fieldnumreg"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Técnico(a) da Coleção*: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldtech" type="text" name="fieldtech"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Discente: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldstudent" type="text" name="fieldstudent"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Orientador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldsupervisor" type="text" name="fieldsupervisor"></div></div>
