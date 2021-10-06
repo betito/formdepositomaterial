@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DecForm } from './dec-form';
 
 import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 // import pdfMake from 'pdfmake/build/pdfmake';
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
   ];
 
   decFormModel = new DecForm('', '', '', '', '', '', this.preservation, '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+  y = 82; // 
 
   constructor() {
   }
@@ -155,49 +157,54 @@ export class AppComponent implements OnInit {
     return true;
   }
 
+
+public newdownload(){
+
+  let imgData1 = './assets/imgs/brasao.png';
+  var element = document.getElementById ("allmycontent");
+
+  
+  html2canvas(element).then((canvas) => {
+    console.log(canvas);
+
+    var imgData = canvas.toDataURL(imgData1);
+
+    const doc = new jsPDF('p', 'mm', 'a4', true);
+
+    doc.addImage(imgData, 0, 0, 208, 500);
+
+    doc.save ('declaracao.pdf');
+  });
+}
+
   public downloadAsPDF() {
 
     //if (this.validateForm()) {
 
-      let imgData1 = './assets/imgs/brasao.png';
-      let imgData2 = './assets/imgs/inpa-colecoesinpa-mctic.jpg';
       let content = '';
       const x = 20;
-      let y = 40;
+      this.y = 40;
       const x_meio = 105;
 
-      const doc = new jsPDF();
+      const doc = new jsPDF('p', 'mm', 'a4', true);
 
-      //content += '<img width="75px" src="./assets/imgs/brasao.png" alt="Brasão"/><br/>';
-      const img = new Image();
-      img.src = imgData1;
-      doc.addImage(img, 'PNG', x_meio - 10, y - 20, 15, 15);
-
-      doc.setFontSize(8);
-      content = 'MINISTÉRIO DA CIÊNCIA, TECNOLOGIA E INOVAÇÃO - MCTI\n';
-      doc.text (content, x_meio - 45, y );
-      doc.setFontSize(11);
-      content = 'INSTITUTO NACIONAL DE PESQUISAS DA AMAZÔNIA\n';
-      doc.text (content, x_meio - 55, y + 4);
-      doc.setFontSize(9);
-      content = 'PROGRAMA DE COLEÇÕES CIENTÍFICAS BIOLÓGICAS - PCCB\n';
-      doc.text (content, x_meio - 50, y + 8);
-      content = 'Avenida André Araújo, 2936 - Petrópolis – 69.067-375 – Manaus, Amazonas, Brasil';
-      doc.text (content, x_meio - 60, y + 12);
+      this.writeHeader(doc);
+      this.writeFooter (doc);
+      
       doc.setFontSize(16);
       doc.setFont('Verdana','bold');
       content = '\n\nDECLARAÇÃO\n\n';
-      doc.text (content, x_meio - 25, y + 10);
+      doc.text (content, x_meio - 25, this.y + 10);
       doc.setFont('Verdana','normal');
       doc.setFontSize(12);
       content = 'Declaro que:\n\n';
       this.buildDoc (doc, content, '', x, 75);
 
-      y = 82;
-      this.buildDoc (doc, 'Nome:\t\t\t\t', this.decFormModel.fieldname, x, y);
-      this.buildDoc (doc, 'Programa:\t\t\t\t', this.decFormModel.fieldprogramtext, x, y += 7);
-      this.buildDoc (doc, 'Nível:\t\t\t\t', this.decFormModel.fieldprogramoutrotext, x, y += 7);
-      this.buildDoc (doc, 'Curadoria:\t\t\t\t', this.decFormModel.fieldcuradoria, x, y += 7);
+      this.y = 82;
+      this.buildDoc (doc, 'Nome:\t\t\t\t', this.decFormModel.fieldname, x, this.y);
+      this.buildDoc (doc, 'Programa:\t\t\t\t', this.decFormModel.fieldprogramtext, x, this.y += 7);
+      this.buildDoc (doc, 'Nível:\t\t\t\t', this.decFormModel.fieldprogramoutrotext, x, this.y += 7);
+      this.buildDoc (doc, 'Curadoria:\t\t\t\t', this.decFormModel.fieldcuradoria, x, this.y += 7);
 
       let preserv = '';
       this.preservation.forEach((elem) => {
@@ -209,30 +216,35 @@ export class AppComponent implements OnInit {
       });
       preserv += '\nOutro: ' + this.decFormModel.fieldpreservoutrotext;
 
-      this.buildDoc (doc, 'Preservação:\t\t\t\t', preserv, x, y += 7);
-      y += 30;
-      this.buildDoc (doc, 'Data (mm/dd/yyyy):\t\t\t\t', this.decFormModel.fielddate, x, y += 7);
-      this.buildDoc (doc, 'Título do trabalho:\t\t\t\t', this.decFormModel.fieldtitle, x, y += 7);
-      this.buildDoc (doc, 'depositou na coleção de Invertebrados do INPA o seguinte material biológico:', '', x, y += 7);
-      this.buildDoc (doc, 'Quantidade:', this.decFormModel.fieldhowmany, x, y += 7);
-      this.buildDoc (doc, 'Quantidade de espécies:\t\t\t\t', this.decFormModel.fieldhowmanyspecie, x, y += 7);
-      this.buildDoc (doc, 'Ordem:\t\t\t\t', this.decFormModel.fieldorder, x, y += 7);
-      this.buildDoc (doc, 'Família (s):\t\t\t\t', this.decFormModel.fieldfamily, x, y += 7);
-      this.buildDoc (doc, 'Gênero:\t\t\t\t', this.decFormModel.fieldgenre, x, y += 7);
-      this.buildDoc (doc, 'Espécie: \t\t\t\t', this.decFormModel.fieldspecie, x, y += 7);
-      this.buildDoc (doc, 'Núm. de registro: \t\t\t\t', this.decFormModel.fieldnumreg, x, y += 7);
+      this.buildDoc (doc, 'Preservação:\t\t\t\t', preserv, x, this.y += 7);
+      this.y += 30;
+      this.buildDoc (doc, 'Data (mm/dd/yyyy):\t\t\t\t', this.decFormModel.fielddate, x, this.y += 7);
+
+      this.buildDoc (doc, 'Título do trabalho:\t\t\t\t', '', x, this.y += 7);
+      var splitText = doc.splitTextToSize(this.decFormModel.fieldtitle, 120);
+      doc.setFontSize(11);
+      var y1 = this.y;
+      let tit = '';
+      for (var xsplit of splitText){
+        console.log(y1);
+        this.buildDoc(doc, '', xsplit, x, this.y += 7);     
+      }
+
+      this.buildDoc(doc, '', tit, x, this.y += 7);
+      this.buildDoc (doc, 'depositou na coleção de Invertebrados do INPA o seguinte material biológico:', '', x, this.y += 7);
+      this.buildDoc (doc, 'Quantidade:', this.decFormModel.fieldhowmany, x, this.y += 7);
+      this.buildDoc (doc, 'Quantidade de espécies:\t\t\t\t', this.decFormModel.fieldhowmanyspecie, x, this.y += 7);
+      this.buildDoc (doc, 'Ordem:\t\t\t\t', this.decFormModel.fieldorder, x, this.y += 7);
+      this.buildDoc (doc, 'Família (s):\t\t\t\t', this.decFormModel.fieldfamily, x, this.y += 7);
+      this.buildDoc (doc, 'Gênero:\t\t\t\t', this.decFormModel.fieldgenre, x, this.y += 7);
+      this.buildDoc (doc, 'Espécie: \t\t\t\t', this.decFormModel.fieldspecie, x, this.y += 7);
+      this.buildDoc (doc, 'Núm. de registro: \t\t\t\t', this.decFormModel.fieldnumreg, x, this.y += 7);
 
       const signature =  '\n(ASSINATURA) ____________________________ ';
-      this.buildDoc (doc, 'TÉCNICO DA COLEÇÃO*:\n*conferente\t\t\t\t', this.decFormModel.fieldtech + signature, x, y += 15);
-      this.buildDoc (doc, 'DISCENTE:\t\t\t\t', this.decFormModel.fieldstudent + signature, x, y += 15);
-      this.buildDoc (doc, 'ORIENTADOR:\t\t\t\t', this.decFormModel.fieldsupervisor + signature, x, y += 15);
-      this.buildDoc (doc, 'CURADOR:\t\t\t\t', this.decFormModel.fieldcurator + signature, x, y += 15);
-      //this.buildDoc (doc, '*conferente', '', x, y += 7);
-
-      const img2 = new Image();
-      img2.src = imgData2;
-      doc.addImage(img2, 'PNG', x_meio-10, y +=10, 90, 15);
-
+      this.buildDoc (doc, 'TÉCNICO DA COLEÇÃO*:\n*conferente\t\t\t\t', this.decFormModel.fieldtech + signature, x, this.y += 15);
+      this.buildDoc (doc, 'DISCENTE:\t\t\t\t', this.decFormModel.fieldstudent + signature, x, this.y += 15);
+      this.buildDoc (doc, 'ORIENTADOR:\t\t\t\t', this.decFormModel.fieldsupervisor + signature, x, this.y += 15);
+      this.buildDoc (doc, 'CURADOR:\t\t\t\t', this.decFormModel.fieldcurator + signature, x, this.y += 15);
 
       doc.save ('declaracao.pdf');
 
@@ -243,11 +255,70 @@ export class AppComponent implements OnInit {
 
 
   private buildDoc(doc, label, value, curx, cury) {
-      let x_offset = 85;
+    let pageHeight = doc.internal.pageSize.height;
+    let x_offset = 85;
+
+    if (cury > pageHeight - 40) {
+
+        this.addNewPage(doc);
+        this.y = 70;
+        doc.setFont('times','normal');
+        doc.text(label, curx, this.y);
+        doc.setFont('times','bold');
+        doc.text(value, x_offset, this.y);
+
+
+    }else{
+      
       doc.setFont('times','normal');
       doc.text(label, curx, cury);
       doc.setFont('times','bold');
       doc.text(value, x_offset, cury);
+    }
+  }
+
+  
+  private writeHeader (doc){
+
+    let imgData = './assets/imgs/brasao.png';
+    let content = '';
+    const x_meio = 105;
+    let y = 40;
+    
+    const img = new Image();
+    img.src = imgData;
+    doc.addImage(img, 'PNG', 95, 20, 15, 15, undefined, 'FAST'); 
+
+    doc.setFontSize(8);
+    content = 'MINISTÉRIO DA CIÊNCIA, TECNOLOGIA E INOVAÇÃO - MCTI\n';
+    doc.text (content, x_meio - 45, y );
+    doc.setFontSize(11);
+    content = 'INSTITUTO NACIONAL DE PESQUISAS DA AMAZÔNIA\n';
+    doc.text (content, x_meio - 55, y + 4);
+    doc.setFontSize(9);
+    content = 'PROGRAMA DE COLEÇÕES CIENTÍFICAS BIOLÓGICAS - PCCB\n';
+    doc.text (content, x_meio - 50, y + 8);
+    content = 'Avenida André Araújo, 2936 - Petrópolis – 69.067-375 – Manaus, Amazonas, Brasil';
+    doc.text (content, x_meio - 60, y + 12);
+  }
+
+  private writeFooter (doc){
+
+    let imgData = './assets/imgs/inpa-colecoesinpa-mctic.jpg';
+
+    const img = new Image();
+    img.src = imgData;
+    doc.addImage(img, 'JPG', 95, 270, 90, 15, undefined,'FAST'); 
+
+  }
+
+
+  private addNewPage (doc){    
+
+    doc.addPage();
+    this.writeHeader (doc);
+    this.writeFooter (doc);
+
   }
 
 }
