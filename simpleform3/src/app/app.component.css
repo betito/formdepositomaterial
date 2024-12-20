@@ -1,0 +1,51 @@
+
+
+header {
+    text-align: center;
+}
+
+
+table, tr, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.fontroboto {
+    font-family: Roboto;
+}
+
+
+.fontsize08 {
+    font-size: 12pt;
+}
+
+
+.fontsize09 {
+    font-size: 09pt;
+}
+
+
+.fontsize11 {
+    font-size: 11pt;
+}
+
+
+.fontsize12 {
+    font-size: 12pt;
+}
+
+.fontsize14 {
+    font-size: 14pt;
+}
+
+.fontsize16 {
+    font-size: 16pt;
+}
+
+.mcenter {
+    text-align: center;
+}
+
+.extra-space-bottom {
+    margin-bottom: 20px;
+}

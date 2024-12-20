@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public check1(event) {
+  public check1(event:any) {
     if (event.target.value === 'OUTRO') {
       this.isHidden = false;
     } else {
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public check2(event) {
+  public check2(event:any) {
     if (event.target.value === 'OUTRO') {
       this.isHidden2 = false;
     } else {
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  changeSelection(e) {
+  changeSelection(e:any) {
     console.log(e.value + ' = ' + e.checked);
     this.preservation.forEach ( (elem) => {
       if (elem.name === e.value) {
@@ -164,7 +164,7 @@ public newdownload(){
   var element = document.getElementById ("allmycontent");
 
   
-  html2canvas(element).then((canvas) => {
+  html2canvas(element as HTMLElement).then((canvas) => {
     console.log(canvas);
 
     var imgData = canvas.toDataURL(imgData1);
@@ -254,7 +254,7 @@ public newdownload(){
   }
 
 
-  private buildDoc(doc, label, value, curx, cury) {
+  private buildDoc(doc: any, label: any, value: any, curx: any, cury: any) {
     let pageHeight = doc.internal.pageSize.height;
     let x_offset = 85;
 
@@ -278,7 +278,7 @@ public newdownload(){
   }
 
   
-  private writeHeader (doc){
+  private writeHeader (doc: any){
 
     let imgData = './assets/imgs/brasao.png';
     let content = '';
@@ -302,7 +302,7 @@ public newdownload(){
     doc.text (content, x_meio - 60, y + 12);
   }
 
-  private writeFooter (doc){
+  private writeFooter (doc: any){
 
     let imgData = './assets/imgs/inpa-colecoesinpa-mctic.jpg';
 
@@ -313,7 +313,7 @@ public newdownload(){
   }
 
 
-  private addNewPage (doc){    
+  private addNewPage (doc: any){    
 
     doc.addPage();
     this.writeHeader (doc);
