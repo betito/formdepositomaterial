@@ -180,7 +180,7 @@ public newdownload(){
   public downloadAsPDF() {
 
     //if (this.validateForm()) {
-
+      var offsetH = 0;
       let content = '';
       const x = 20;
       this.y = 40;
@@ -235,10 +235,14 @@ public newdownload(){
       this.buildDoc (doc, 'Quantidade:', this.decFormModel.fieldhowmany, x, this.y += 7);
       this.buildDoc (doc, 'Quantidade de espécies:\t\t\t\t', this.decFormModel.fieldhowmanyspecie, x, this.y += 7);
       this.buildDoc (doc, 'Ordem:\t\t\t\t', this.decFormModel.fieldorder, x, this.y += 7);
-      this.buildDoc (doc, 'Família (s):\t\t\t\t', this.decFormModel.fieldfamily, x, this.y += 7);
-      this.buildDoc (doc, 'Gênero:\t\t\t\t', this.decFormModel.fieldgenre, x, this.y += 7);
-      this.buildDoc (doc, 'Espécie: \t\t\t\t', this.decFormModel.fieldspecie, x, this.y += 7);
-      this.buildDoc (doc, 'Núm. de registro: \t\t\t\t', this.decFormModel.fieldnumreg, x, this.y += 7);
+      offsetH = this.getHeightText(this.decFormModel.fieldorder);
+      this.buildDoc (doc, 'Família (s):\t\t\t\t', this.decFormModel.fieldfamily, x, this.y += (7 + (offsetH*4)));
+      offsetH = this.getHeightText(this.decFormModel.fieldfamily);
+      this.buildDoc (doc, 'Gênero:\t\t\t\t', this.decFormModel.fieldgenre, x, this.y += (7 + (offsetH*4)));
+      offsetH = this.getHeightText(this.decFormModel.fieldgenre);
+      this.buildDoc (doc, 'Espécie: \t\t\t\t', this.decFormModel.fieldspecie, x, this.y += (7 + (offsetH*4)));
+      offsetH = this.getHeightText(this.decFormModel.fieldspecie);
+      this.buildDoc (doc, 'Núm. de registro: \t\t\t\t', this.decFormModel.fieldnumreg, x, this.y += (7 + (offsetH*4)));
 
       const signature =  '\n(ASSINATURA) ____________________________ ';
       this.buildDoc (doc, 'TÉCNICO DA COLEÇÃO*:\n*conferente\t\t\t\t', this.decFormModel.fieldtech + signature, x, this.y += 15);
@@ -253,6 +257,15 @@ public newdownload(){
     // }
   }
 
+  private getHeightText (text_content: any){
+    console.log("Texto :\n" + text_content);
+    var textsplit = text_content.split(/\r|\r\n|\n/);
+    var count = textsplit.length;
+    console.log("split :" + count);
+
+
+    return count;
+  }
 
   private buildDoc(doc: any, label: any, value: any, curx: any, cury: any) {
     let pageHeight = doc.internal.pageSize.height;
@@ -322,3 +335,11 @@ public newdownload(){
   }
 
 }
+
+
+/*
+ordem 1
+ordem 2
+ordem 3
+ordem 4
+*/

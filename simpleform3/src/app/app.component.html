@@ -118,16 +118,16 @@
         <div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Data (MM/DD/YYYY): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fielddate" placeholder="dd/mm/yyyy" type="date" name="fielddate"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Quantidade de espécies: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldhowmanyspecie" type="text" name="fieldhowmanyspecie"></div></div>
-          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Ordem: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldorder" type="text" name="fieldorder"></div></div>
-          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Família (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldfamily" type="text" name="fieldfamily"></div></div>
-          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Gênero (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldgenre" type="text" name="fieldgenre"></div></div>
-          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Espécie (s): </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldspecie"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Ordem: </div><div class="col-md-8 col-sd-8"> <textarea class="form-control"  [(ngModel)]="decFormModel.fieldorder" type="text" name="fieldorder"></textarea></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Família (s)* : </div><div class="col-md-8 col-sd-8"> <textarea class="form-control"  [(ngModel)]="decFormModel.fieldfamily" name="fieldfamily"></textarea></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Gênero (s)*: </div><div class="col-md-8 col-sd-8"> <textarea class="form-control"  [(ngModel)]="decFormModel.fieldgenre" type="text" name="fieldgenre"></textarea></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Espécie (s)*: </div><div class="col-md-8 col-sd-8"> <textarea class="form-control"  [(ngModel)]="decFormModel.fieldspecie" type="text" name="fieldspecie"></textarea></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Num. de Registro: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldnumreg" type="text" name="fieldnumreg"></div></div>
-          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Técnico(a) da Coleção*: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldtech" type="text" name="fieldtech"></div></div>
+          <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Técnico(a) da Coleção **: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldtech" type="text" name="fieldtech"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Discente: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldstudent" type="text" name="fieldstudent"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Orientador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldsupervisor" type="text" name="fieldsupervisor"></div></div>
           <div class="row"><div class="fontsize14 col-md-3 col-sd-3">Curador: </div><div class="col-md-8 col-sd-8"> <input class="form-control"  [(ngModel)]="decFormModel.fieldcurator" type="text" name="fieldcurator"></div> </div>
-        <br/>*conferente
+        <br/>* caso seja mais de um item, escreva um família por linha;<br/>** conferente;
         </div>
         <br/>
         <div class="row">
