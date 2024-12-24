@@ -192,10 +192,10 @@ public newdownload(){
       this.writeFooter (doc);
       
       doc.setFontSize(16);
-      doc.setFont('Verdana','bold');
+      doc.setFont('times','bold');
       content = '\n\nDECLARAÇÃO\n\n';
       doc.text (content, x_meio - 25, this.y + 10);
-      doc.setFont('Verdana','normal');
+      doc.setFont('times','normal');
       doc.setFontSize(12);
       content = 'Declaro que:\n\n';
       this.buildDoc (doc, content, '', x, 75);
@@ -283,9 +283,9 @@ public newdownload(){
 
     }else{
       
-      doc.setFont('times','normal');
+      doc.setFont('Verdana','normal');
       doc.text(label, curx, cury);
-      doc.setFont('times','bold');
+      doc.setFont('Verdana','bold');
       doc.text(value, x_offset, cury);
     }
   }
